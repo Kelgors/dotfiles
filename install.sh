@@ -1,9 +1,7 @@
 #!/bin/bash
-source kelgors.profile
+source user.profile
 path=$(pwd)
 mkdir -p $HOME/Build/ && cd $HOME/Build/
-
-echo "Welcome to you new environment"
 
 if [[ ! -f $(which fzf) ]];
 then
