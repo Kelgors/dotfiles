@@ -9,9 +9,6 @@ window:
 scrolling:
   history: 2000
 live_config_reload: true
-shell:
-  program: /bin/bash
-  # program: /usr/bin/tmux
 working_directory: None
 font:
   normal:
