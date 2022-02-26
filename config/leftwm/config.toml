@@ -39,7 +39,7 @@ key = "x"
 
 [[keybind]]
 command = "Execute"
-value = "slock"
+value = "$HOME/.config/leftwm/lock_screen.sh"
 modifier = ["modkey", "Control"]
 key = "l"
 
@@ -133,6 +133,20 @@ key = "Up"
 command = "PreviousLayout"
 modifier = ["modkey", "Control"]
 key = "Down"
+
+###############
+## Workspace ##
+###############
+
+[[keybind]]
+command = "FocusNextTag"
+modifier = ["modkey"]
+key = "Page_Down"
+
+[[keybind]]
+command = "FocusPreviousTag"
+modifier = ["modkey"]
+key = "Page_Up"
 
 [[keybind]]
 command = "FocusWorkspaceNext"
