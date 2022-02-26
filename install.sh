@@ -14,17 +14,23 @@ sudo apt upgrade -y
 
 sudo apt install -y \
   build-essential git curl wget htop tar # standard deps \
-  fzf bat silversearcher-ag ripgrep # fzf-vim deps \
+  bat exa fd-find ripgrep \ # rust replacements
+  fzf silversearcher-ag # fzf-vim deps \
   fish # fish shell
 fi
 
 # Install Rust
 if [[ ! -d $HOME/.rustup ]];
 then
-  echo "  Installing Rust"
+  echo " Installing Rust"
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 else
   echo "  Rust already installed"
+fi
+
+if [[ ! -f $(which procs) ]];
+then
+  cargo install procs
 fi
 
 # Install Node
