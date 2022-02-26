@@ -1,8 +1,11 @@
 #!/bin/bash
 source user.profile
 path=$(pwd)
+config_folders="alacritty nvim"
+
 mkdir -p $HOME/Build/ && cd $HOME/Build/
 
+# Install deps
 if [[ ! -f $(which fzf) ]];
 then
 echo "  Installing dependencies"
@@ -11,10 +14,11 @@ sudo apt upgrade -y
 
 sudo apt install -y \
   build-essential git curl wget htop tar # standard deps \
-  fzf bat silversearcher-ag ripgrep # install fzf-vim deps \
-  fish
+  fzf bat silversearcher-ag ripgrep # fzf-vim deps \
+  fish # fish shell
 fi
 
+# Install Rust
 if [[ ! -d $HOME/.rustup ]];
 then
   echo "  Installing Rust"
@@ -23,6 +27,7 @@ else
   echo "  Rust already installed"
 fi
 
+# Install Node
 if [[ ! -d $HOME/Build/node-$NODE_VERSION-linux-x64 ]];
 then
   echo "  Installing Node $NODE_VERSION"
@@ -36,22 +41,26 @@ else
   echo "  Node $NODE_VERSION already installed"
 fi
 
+# Install Neovim
 if [[ ! -f $(which nvim) ]];
 then
   echo "  Installing nvim"
   sudo apt install -y neovim
 fi
-# add vim-plug
+
+# Install vim-plug for neovim
 sh -c "curl -sfLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
-# local directory
+# Prepare local directory
 [[ ! -d $HOME/.local ]] && mkdir -p $HOME/.local/share
 [[ ! -d $HOME/.local/share ]] && mkdir $HOME/.local/share
+
+# Install powerline fonts
 [[ -d $HOME/.local/share/fonts ]] && rm -r $HOME/.local/share/fonts
 ln -sf $path/local/share/fonts $HOME/.local/share/fonts
 
+# Link config folders
 echo "  Setting config up"
-config_folders="alacritty nvim"
 
 for config_folder in $config_folders
 do
@@ -64,6 +73,7 @@ do
   ln -sf $path/config/$config_folder $HOME/.config/$config_folder
 done
 
+# User profile variables (with nothing else)
 if [[ ! -f $HOME/.$USER.profile ]];
 then
   echo "Creating symlink for .$USER.profile"
