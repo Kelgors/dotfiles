@@ -19,6 +19,8 @@ let g:NERDTreeDirArrowExpandable="+"
 let g:NERDTreeDirArrowCollapsible="~"
 let g:airline_powerline_fonts = 1
 
+highlight CocErrorFloat ctermfg=0
+
 " PlugClean to remove no longer used plugins
 " PlugInstall
 " PlugUpdate
