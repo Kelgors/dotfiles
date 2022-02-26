@@ -1,4 +1,4 @@
-export NODE_VERSION=v16.14.0-linux-x64
+export NODE_VERSION=v16.14.0
 
 export EDITOR="nvim"
 export VISUAL="nvim"

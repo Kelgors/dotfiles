@@ -25,13 +25,14 @@ else
   echo "  Rust already installed"
 fi
 
-if [[ ! -d $HOME/Build/node-$NODE_VERSION ]];
+if [[ ! -d $HOME/Build/node-$NODE_VERSION-linux-x64 ]];
 then
   echo "  Installing Node $NODE_VERSION"
-  wget https://nodejs.org/dist/$NODE_VERSION/node-$noe_version.tar.xz
-  tar xf node-$NODE_VERSION.tar.xz
-  rm node-$NODE_VERSION.tar.xz
-  $HOME/Build/node-$NODE_VERSION/bin/corepack enable
+  wget https://nodejs.org/dist/$NODE_VERSION/node-$NODE_VERSION-linux-x64.tar.xz
+  echo "  Extracting archive"
+  tar xf node-$NODE_VERSION-linux-x64.tar.xz
+  rm node-$NODE_VERSION-linux-x64.tar.xz
+  $HOME/Build/node-$NODE_VERSION-linux-x64/bin/corepack enable
   cd $HOME
 else
   echo "  Node $NODE_VERSION already installed"
@@ -65,11 +66,11 @@ do
   ln -sf $path/config/$config_folder $HOME/.config/$config_folder
 done
 
-if [[ ! -f $HOME/.kelgors.profile ]];
+if [[ ! -f $HOME/.$USER.profile ]];
 then
-  echo "Creating symlink for .kelgors.profile"
-  ln -sf $path/kelgors.profile $HOME/.kelgors.profile
+  echo "Creating symlink for .$USER.profile"
+  ln -sf $path/user.profile $HOME/.$USER.profile
   echo "# source personal variables" >> $HOME/.bashrc
-  echo "source \$HOME/.kelgors.profile" >> $HOME/.bashrc
+  echo "source \$HOME/.$USER.profile" >> $HOME/.bashrc
 fi
 
