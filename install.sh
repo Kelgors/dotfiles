@@ -1,7 +1,7 @@
 #!/bin/bash
 source user.profile
 path=$(pwd)
-config_folders="alacritty nvim"
+config_folders="alacritty nvim leftwm"
 
 mkdir -p $HOME/Build/ && cd $HOME/Build/
 
