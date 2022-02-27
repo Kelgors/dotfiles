@@ -4,12 +4,14 @@ if [[ ! -f $(which feh) ]];
 then
   echo "Installing dependencies"
   sudo apt install \
+    x11-xserver-utils xorg lightdm \
     libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev \
     libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev \
     libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev \
     libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev \
     uthash-dev libev-dev libx11-xcb-dev meson \
     i3lock \
+    libssl-dev \
     rofi feh compton polybar xmobar lemonbar conky dmenu # leftwm deps
 fi
 
@@ -26,9 +28,13 @@ fi
 
 echo "Installing leftwm"
 cargo install leftwm
+# ad to main path
+sudo mv $HOME/.cargo/bin/leftwm* /usr/local/bin/
 if [[ ! -f /usr/share/xsessions/leftwm.desktop ]];
 then
-  sudo curl https://raw.githubusercontent.com/leftwm/leftwm/main/leftwm.desktop > /usr/share/xsessions/leftwm.desktop
+  # add desktop entry
+  [[ ! -d /usr/share/xsessions ]] && sudo mkdir /usr/share/xsessions
+  sudo curl -o /usr/share/xsessions/leftwm.desktop https://raw.githubusercontent.com/leftwm/leftwm/main/leftwm.desktop
 fi
 
 if [[ ! -d $HOME/Build/leftwm-theme ]];
@@ -44,7 +50,7 @@ fi
 if [[ ! -f $(which xwobf) ]];
 then
   echo "Installing xwobf"
-  sudo apt-get install libmagickwand-dev
+  sudo apt install libmagickwand-dev
   cd $HOME/Build
   git clone https://github.com/PhABC/xwobf && cd xwobf
   git switch libmagick6
