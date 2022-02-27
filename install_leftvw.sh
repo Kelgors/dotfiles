@@ -12,6 +12,7 @@ then
     uthash-dev libev-dev libx11-xcb-dev meson \
     i3lock \
     libssl-dev \
+    pavucontrol \
     rofi feh compton polybar xmobar lemonbar conky dmenu # leftwm deps
 fi
 

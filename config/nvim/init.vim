@@ -20,6 +20,8 @@ let g:NERDTreeDirArrowCollapsible="~"
 let g:airline_powerline_fonts = 1
 
 highlight CocErrorFloat ctermfg=0
+source ~/.config/nvim/coc.vim
+source ~/.config/nvim/trim_trailing_whitespace.vim
 
 " PlugClean to remove no longer used plugins
 " PlugInstall
@@ -38,18 +40,3 @@ highlight CocErrorFloat ctermfg=0
 " :CocInstall coc-git
 " :CocInstall coc-eslint
 " :CocInstall coc-prettier
-
-function! s:TrimTrailingWhitespace() " {{{1
-    if &l:modifiable
-        " don't lose user position when trimming trailing whitespace
-        let s:view = winsaveview()
-        try
-            silent! keeppatterns keepjumps %s/\s\+$//e
-        finally
-            call winrestview(s:view)
-        endtry
-    endif
-endfunction " }}}1
-
-autocmd BufWritePre <buffer> call s:TrimTrailingWhitespace()
-
