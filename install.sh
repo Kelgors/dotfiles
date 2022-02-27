@@ -85,5 +85,5 @@ then
 fi
 
 # rewrite symlink for leftwm
-rm $HOME/.config/leftwm/themes/current
+[[ -f $HOME/.config/leftwm/themes/current ]] && rm $HOME/.config/leftwm/themes/current
 ln -sf "$HOME/.config/leftwm/themes/Dracula Rounded" $HOME/.config/leftwm/themes/current
