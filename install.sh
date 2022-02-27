@@ -13,9 +13,9 @@ sudo apt update -q
 sudo apt upgrade -y
 
 sudo apt install -y \
-  build-essential git curl wget htop tar # standard deps \
-  bat exa fd-find ripgrep \ # rust replacements
-  fzf silversearcher-ag # fzf-vim deps \
+  build-essential git curl wget htop tar \
+  bat exa fd-find ripgrep \
+  fzf silversearcher-ag \
   fish # fish shell
 fi
 
