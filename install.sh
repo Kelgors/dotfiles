@@ -28,11 +28,6 @@ else
   echo "  Rust already installed"
 fi
 
-if [[ ! -f $(which procs) ]];
-then
-  cargo install procs
-fi
-
 # Install Node
 if [[ ! -d $HOME/Build/node-$NODE_VERSION-linux-x64 ]];
 then
