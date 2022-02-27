@@ -11,7 +11,8 @@ focus_new_windows = true
 
 [[keybind]]
 command = "Execute"
-value = "dmenu_run"
+#value = "dmenu_run"
+value = "rofi -no-config -no-lazy-grab -show drun -theme $HOME/.config/leftwm/themes/current/rofi/launcher.rasi"
 modifier = ["modkey"]
 key = "space"
 

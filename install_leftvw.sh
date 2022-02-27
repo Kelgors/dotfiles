@@ -10,7 +10,7 @@ then
     libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev \
     uthash-dev libev-dev libx11-xcb-dev meson \
     i3lock \
-    feh compton polybar xmobar lemonbar conky dmenu # leftwm deps
+    rofi feh compton polybar xmobar lemonbar conky dmenu # leftwm deps
 fi
 
 echo "Building picom"
@@ -18,16 +18,11 @@ if [[ ! -d $HOME/Build/picom ]];
 then
   cd $HOME/Build
   git clone https://github.com/yshui/picom && cd picom
-else
-  cd $HOME/Build/picom
-  meson setup --wipe . build
-  git pull
+  git submodule update --init --recursive
+  meson --buildtype=release . build
+  ninja -C build
+  sudo ninja -C build install
 fi
-
-git submodule update --init --recursive
-meson --buildtype=release . build
-ninja -C build
-sudo ninja -C build install
 
 echo "Installing leftwm"
 cargo install leftwm
@@ -40,14 +35,11 @@ if [[ ! -d $HOME/Build/leftwm-theme ]];
 then
   cd $HOME/Build
   git clone https://github.com/leftwm/leftwm-theme && cd leftwm-theme
-else
-  cd $HOME/Build/leftwm-theme
-  git pull
+  cargo build --release
+  strip -s target/release/leftwm-theme
+  sudo install -s -Dm755 target/release/leftwm-theme -t /usr/bin
+  cargo clean
 fi
-cargo build --release
-strip -s target/release/leftwm-theme
-sudo install -s -Dm755 target/release/leftwm-theme -t /usr/bin
-cargo clean
 
 if [[ ! -f $(which xwobf) ]];
 then
@@ -59,5 +51,4 @@ then
   make
   sudo make install
 fi
-
 
