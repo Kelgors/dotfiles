@@ -13,13 +13,24 @@ focus_new_windows = true
 command = "Execute"
 value = "dmenu_run"
 modifier = ["modkey"]
-key = "p"
+key = "space"
 
 [[keybind]]
 command = "Execute"
 value = "alacritty"
 modifier = ["modkey", "Shift"]
 key = "Return"
+
+[[keybind]]
+command = "Execute"
+value = "firefox"
+modifier = ["modkey", "Shift"]
+key = "b"
+
+
+###########
+# General #
+###########
 
 [[keybind]]
 command = "CloseWindow"
@@ -30,6 +41,11 @@ key = "q"
 command = "SoftReload"
 modifier = ["modkey", "Shift"]
 key = "r"
+
+[[keybind]]
+command = "ToggleFullScreen"
+modifier = ["modkey", "Shift"]
+key = "f"
 
 [[keybind]]
 command = "Execute"
@@ -49,40 +65,7 @@ value = "maim -i \"$(xdotool getactivewindow)\" ~/Downloads/Screenshot-$(date '+
 modifier = ["modkey"]
 key = "Print"
 
-[[keybind]]
-command = "MoveToLastWorkspace"
-modifier = ["modkey", "Shift"]
-key = "w"
-
-[[keybind]]
-command = "SwapTags"
-modifier = ["modkey"]
-key = "w"
-
-[[keybind]]
-command = "MoveWindowUp"
-modifier = ["modkey", "Shift"]
-key = "k"
-
-[[keybind]]
-command = "MoveWindowDown"
-modifier = ["modkey", "Shift"]
-key = "j"
-
-[[keybind]]
-command = "MoveWindowTop"
-modifier = ["modkey"]
-key = "Return"
-
-[[keybind]]
-command = "FocusWindowUp"
-modifier = ["modkey"]
-key = "k"
-
-[[keybind]]
-command = "FocusWindowDown"
-modifier = ["modkey"]
-key = "j"
+# Layouts
 
 [[keybind]]
 command = "NextLayout"
@@ -95,14 +78,27 @@ modifier = ["modkey", "Control"]
 key = "j"
 
 [[keybind]]
-command = "FocusWorkspaceNext"
-modifier = ["modkey"]
-key = "l"
+command = "NextLayout"
+modifier = ["modkey", "Control"]
+key = "Up"
 
 [[keybind]]
-command = "FocusWorkspacePrevious"
+command = "PreviousLayout"
+modifier = ["modkey", "Control"]
+key = "Down"
+#############
+## Windows ##
+#############
+
+[[keybind]]
+command = "SwapTags"
 modifier = ["modkey"]
-key = "h"
+key = "w"
+
+[[keybind]]
+command = "MoveWindowTop"
+modifier = ["modkey"]
+key = "Return"
 
 [[keybind]]
 command = "MoveWindowUp"
@@ -117,21 +113,11 @@ key = "Down"
 [[keybind]]
 command = "FocusWindowUp"
 modifier = ["modkey"]
-key = "Left"
+key = "Up"
 
 [[keybind]]
 command = "FocusWindowDown"
 modifier = ["modkey"]
-key = "Right"
-
-[[keybind]]
-command = "NextLayout"
-modifier = ["modkey", "Control"]
-key = "Up"
-
-[[keybind]]
-command = "PreviousLayout"
-modifier = ["modkey", "Control"]
 key = "Down"
 
 ###############
@@ -151,12 +137,12 @@ key = "Page_Up"
 [[keybind]]
 command = "FocusWorkspaceNext"
 modifier = ["modkey"]
-key = "Down"
+key = "Left"
 
 [[keybind]]
 command = "FocusWorkspacePrevious"
 modifier = ["modkey"]
-key = "Up"
+key = "Right"
 
 [[keybind]]
 command = "GotoTag"
