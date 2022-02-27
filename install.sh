@@ -67,6 +67,7 @@ ln -sf $path/local/share/fonts $HOME/.local/share/fonts
 
 # Link config folders
 echo "  Setting config up"
+[[ ! -d $HOME/.config ]] && mkdir $HOME/.config
 
 for config_folder in $config_folders
 do
