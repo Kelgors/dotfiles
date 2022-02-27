@@ -37,16 +37,6 @@ then
   sudo curl -o /usr/share/xsessions/leftwm.desktop https://raw.githubusercontent.com/leftwm/leftwm/main/leftwm.desktop
 fi
 
-if [[ ! -d $HOME/Build/leftwm-theme ]];
-then
-  cd $HOME/Build
-  git clone https://github.com/leftwm/leftwm-theme && cd leftwm-theme
-  cargo build --release
-  strip -s target/release/leftwm-theme
-  sudo install -s -Dm755 target/release/leftwm-theme -t /usr/bin
-  cargo clean
-fi
-
 if [[ ! -f $(which xwobf) ]];
 then
   echo "Installing xwobf"

@@ -84,3 +84,6 @@ then
   echo "source \$HOME/.$USER.profile" >> $HOME/.bashrc
 fi
 
+# rewrite symlink for leftwm
+rm $HOME/.config/leftwm/themes/current
+ln -sf "$HOME/.config/leftwm/themes/Dracula Rounded" $HOME/.config/leftwm/themes/current
