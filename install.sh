@@ -75,6 +75,10 @@ do
   ln -sf $path/config/$config_folder $HOME/.config/$config_folder
 done
 
+echo "Creating .xinitrc symlink"
+[[ -f $HOME/.xinitrc ]] && rm $HOME/.xinitrc
+ln -sf $path/xinitrc $HOME/.xinitrc
+
 # User profile variables (with nothing else)
 if [[ ! -f $HOME/.$USER.profile ]];
 then

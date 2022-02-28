@@ -1,0 +1,3 @@
+setxkbmap -model pc105 -layout fr -variant ,azerty
+numlockx on
+

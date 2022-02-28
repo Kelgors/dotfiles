@@ -10,3 +10,4 @@ export PATH="$HOME/Build/node-$NODE_VERSION-linux-x64/bin:$PATH"
 alias ls="exa"
 alias ll="exa -l"
 alias fd="fdfind"
+
