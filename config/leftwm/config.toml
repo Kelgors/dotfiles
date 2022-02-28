@@ -1,7 +1,7 @@
 modkey = "Mod4"
 mousekey = "Mod4"
 workspaces = []
-tags = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+tags = ["Teams", "Web", "Server", "Editor", "5", "6", "7", "8", "9"]
 layouts = ["GridHorizontal", "MainAndVertStack", "MainAndHorizontalStack", "MainAndDeck", "GridHorizontal", "EvenHorizontal", "EvenVertical", "Fibonacci", "CenterMain", "CenterMainBalanced", "Monocle", "RightWiderLeftStack", "LeftWiderRightStack"]
 layout_mode = "Workspace"
 scratchpad = []
@@ -28,6 +28,11 @@ value = "firefox"
 modifier = ["modkey", "Shift"]
 key = "b"
 
+[[keybind]]
+command = "Execute"
+value = "flatpak run org.kde.dolphin"
+modifier = ["modkey", "Shift"]
+key = "f"
 
 ###########
 # General #
@@ -45,7 +50,7 @@ key = "r"
 
 [[keybind]]
 command = "ToggleFullScreen"
-modifier = ["modkey", "Shift"]
+modifier = ["modkey"]
 key = "f"
 
 [[keybind]]
