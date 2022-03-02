@@ -34,6 +34,34 @@ value = "flatpak run org.kde.dolphin"
 modifier = ["modkey", "Shift"]
 key = "f"
 
+############################
+## Keyboard meta shortcut ##
+############################
+
+[[keybind]]
+command = "Execute"
+value = "amixer -D pulse set Master 5%-"
+modifier = []
+key = "XF86XK_AudioLowerVolume"
+
+[[keybind]]
+command = "Execute"
+value = "amixer -D pulse set Master 5%+"
+modifier = []
+key = "XF86XK_AudioRaiseVolume"
+
+[[keybind]]
+command = "Execute"
+value = "amixer -D pulse set Master toggle"
+modifier = []
+key = "XF86XK_AudioMute"
+
+[[keybind]]
+command = "Execute"
+value = "amixer set Capture toggle"
+modifier = []
+key = "XF86XK_AudioMicMute"
+
 ###########
 # General #
 ###########
