@@ -40,6 +40,18 @@ key = "f"
 
 [[keybind]]
 command = "Execute"
+value = "xbacklight -dec 10"
+modifier = []
+key = "XF86XK_MonBrightnessDown"
+
+[[keybind]]
+command = "Execute"
+value = "xbacklight -inc 10"
+modifier = []
+key = "XF86XK_MonBrightnessUp"
+
+[[keybind]]
+command = "Execute"
 value = "amixer -D pulse set Master 5%-"
 modifier = []
 key = "XF86XK_AudioLowerVolume"

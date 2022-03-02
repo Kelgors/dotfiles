@@ -1,4 +1,5 @@
 #!/bin/bash
+path=$(pwd)
 
 if [[ ! -f $(which feh) ]];
 then
@@ -12,7 +13,7 @@ then
     uthash-dev libev-dev libx11-xcb-dev meson \
     i3lock \
     libssl-dev \
-    pavucontrol \
+    pavucontrol xbacklight bluez* \
     rofi feh compton polybar xmobar lemonbar conky dmenu # leftwm deps
 fi
 
@@ -29,7 +30,7 @@ fi
 
 echo "Installing leftwm"
 cargo install leftwm
-# ad to main path
+# add to main path
 sudo mv $HOME/.cargo/bin/leftwm* /usr/local/bin/
 if [[ ! -f /usr/share/xsessions/leftwm.desktop ]];
 then
@@ -48,4 +49,8 @@ then
   make
   sudo make install
 fi
+
+echo "Creating .xsessionrc symlink"
+[[ -f $HOME/.xsessionrc ]] && rm $HOME/.xsessionrc
+ln -sf $path/xsession $HOME/.xsessionrc
 
