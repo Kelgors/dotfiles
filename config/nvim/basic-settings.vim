@@ -12,6 +12,7 @@ set guifont=Fira\ Code\ Nerd\ Font\ Mono\ 14
 set clipboard=unnamedplus
 set timeout
 set timeoutlen=500
+set signcolumn=yes
 " setl fileformat=unix " <LF>
 " setl fileformat=dos  " <CR><LF>
 " setl fileformat=mac  " <CR>
