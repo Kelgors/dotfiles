@@ -11,15 +11,15 @@ then
     libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev \
     libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev \
     uthash-dev libev-dev libx11-xcb-dev meson \
-    i3lock \
+    i3lock slim \
     libssl-dev \
     pavucontrol xbacklight bluez* \
     rofi feh compton polybar xmobar lemonbar conky dmenu # leftwm deps
 fi
 
-echo "Building picom"
 if [[ ! -d $HOME/Build/picom ]];
 then
+  echo "Building picom"
   cd $HOME/Build
   git clone https://github.com/yshui/picom && cd picom
   git submodule update --init --recursive
@@ -28,15 +28,18 @@ then
   sudo ninja -C build install
 fi
 
-echo "Installing leftwm"
-cargo install leftwm
-# add to main path
-sudo mv $HOME/.cargo/bin/leftwm* /usr/local/bin/
-if [[ ! -f /usr/share/xsessions/leftwm.desktop ]];
+if [[ ! -f $(which leftwm) ]];
 then
-  # add desktop entry
-  [[ ! -d /usr/share/xsessions ]] && sudo mkdir /usr/share/xsessions
-  sudo curl -o /usr/share/xsessions/leftwm.desktop https://raw.githubusercontent.com/leftwm/leftwm/main/leftwm.desktop
+  echo "Installing leftwm"
+  cargo install leftwm
+  # add to main path
+  sudo mv $HOME/.cargo/bin/leftwm* /usr/local/bin/
+  if [[ ! -f /usr/share/xsessions/leftwm.desktop ]];
+  then
+    # add desktop entry
+    [[ ! -d /usr/share/xsessions ]] && sudo mkdir /usr/share/xsessions
+    sudo curl -o /usr/share/xsessions/leftwm.desktop https://raw.githubusercontent.com/leftwm/leftwm/main/leftwm.desktop
+  fi
 fi
 
 if [[ ! -f $(which xwobf) ]];
@@ -50,7 +53,7 @@ then
   sudo make install
 fi
 
-echo "Creating .xsessionrc symlink"
-[[ -f $HOME/.xsessionrc ]] && rm $HOME/.xsessionrc
-ln -sf $path/xsession $HOME/.xsessionrc
+echo "Creating .xinitrc symlink"
+[[ -f $HOME/.xinitrc ]] && rm $HOME/.xinitrc
+ln -sf $path/xinit $HOME/.xinitrc
 
