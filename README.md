@@ -2,7 +2,7 @@
 
 ## Desktop configuration
 
-Compatible with: Debian,Manjaro
+Compatible with: Debian,Ubuntu,Manjaro
 
 ### install.sh
 
