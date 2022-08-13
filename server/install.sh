@@ -29,8 +29,7 @@ then
     echo "Creating symlink for .$USER.profile"
     ln -sf $path/../user.profile $HOME/.$USER.profile
     
-    $is_present=$(cat $HOME/$rcfile | sed -n "/# source personal variables/p" | wc -l)
-    if [[ $is_present = 0 ]];
+    if [[ "$(cat $HOME/$rcfile | sed -n "/# source personal variables/p" | wc -l)" -eq "0" ]];
     then
         echo "# source personal variables" >> $HOME/$rcfile
         echo "source \$HOME/.$USER.profile" >> $HOME/$rcfile
