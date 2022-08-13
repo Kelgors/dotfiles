@@ -2,7 +2,9 @@
 
 ## Desktop configuration
 
-Compatible with: Debian,Ubuntu,Manjaro
+Tested on: Debian,Ubuntu,Manjaro
+
+_coc-vim_ does not work with neovim version of Debian
 
 ### install.sh
 

@@ -1,0 +1,14 @@
+version: "3"
+services:
+  ubuntu:
+    image: ubuntu:22.04
+    working_dir: /root/dotfiles/server
+    command: bash -lc "apt update && apt install git sudo -y && ./install.sh"
+    volumes:
+      - .:/root/dotfiles
+  debian:
+    image: debian:bullseye
+    working_dir: /root/dotfiles/desktop
+    command: bash -lc "apt update && apt install git sudo -y && ./install.sh"
+    volumes:
+      - .:/root/dotfiles
