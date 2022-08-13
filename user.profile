@@ -15,5 +15,6 @@ fi
 
 if [[ $version = "Debian" ]];
 then
+    alias bat="batcat"
     alias fd="fdfind"
 fi
