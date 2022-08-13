@@ -1,37 +1,28 @@
 # Kelgors dotfiles
 
-Used on Debian based distro with amd64 cpu.
+## Desktop configuration
 
-## install.sh
+Compatible with: Debian,Manjaro
 
-* rust
-* node
-* [neovim](https://github.com/neovim/neovim) (needs :PlugInstall)
-  * vim-plug
-  * coc
-* symlink ~/.config/nvim config/nvim
-* symlink ~/.config/alacritty config/alacritty
-* symlink ~/.config/leftwm config/leftwm
-* symlink ~/.local/share/fonts local/share/fonts (with Fira Code Nerd Font Mono)
+### install.sh
 
-## install\_leftwm.sh
+- [neovim](https://github.com/neovim/neovim) (needs :PlugInstall)
+  - vim-plug
+  - coc
+  - fzf
+  - nerdtree
+- tools: exa, bat, ripgrep, fzf
+- symlink ~/.config/nvim config/nvim
+- languages: node (nvm), rust
+- symlink ~/.local/share/fonts local/share/fonts (with Fira Code Nerd Font Mono)
 
-* xorg
-* picom
-* lightdm
-* i3lock
-* rofi
-* feh
-* compton
-* polybar
-* lemonbar
-* xmobar
-* conky
-* dmenu
-* [leftwm](https://github.com/leftwm/leftwm/)
+## Server configuration
 
-## install\_alacritty.sh
+### install.sh
 
-* [alacritty](https://github.com/alacritty/alacritty)
-* desktop entries
-
+- [neovim](https://github.com/neovim/neovim) (needs :PlugInstall)
+  - vim-plug
+  - fzf
+  - nerdtree
+- tools: exa, bat, ripgrep, fzf
+- symlink ~/.config/nvim config/nvim

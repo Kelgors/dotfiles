@@ -1,13 +1,19 @@
-export NODE_VERSION=v16.14.0
+version=$(lsb_release -is)
 
 export EDITOR="/usr/bin/nvim"
 export VISUAL="/usr/bin/nvim"
 export CODEEDITOR="/usr/bin/nvim"
-export BROWSER="/usr/bin/firefox"
+[[ -f /usr/bin/firefox ]] && export BROWSER="/usr/bin/firefox"
 
-export PATH="$HOME/Build/node-$NODE_VERSION-linux-x64/bin:$PATH"
+alias ls="/usr/bin/exa"
+alias ll="/usr/bin/exa -l"
+alias lla="/usr/bin/exa -la"
+if [[ -f $(command -v vim) ]];
+then
+    alias vim="/usr/bin/nvim"
+fi
 
-alias ls="exa"
-alias ll="exa -l"
-alias fd="fdfind"
-
+if [[ $version = "Debian" ]];
+then
+    alias fd="fdfind"
+fi
