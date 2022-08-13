@@ -35,3 +35,5 @@ then
         echo "source \$HOME/.$USER.profile" >> $HOME/$rcfile
     fi
 fi
+
+$SHELL
