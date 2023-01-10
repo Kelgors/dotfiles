@@ -16,7 +16,9 @@ function build_apps {
 }
 
 function build_gnome_connector {
-    # gnome-browser-connector for https://github.com/ubuntu/gnome-shell-extension-appindicator
+    # gnome-browser-connector for 
+    # - https://extensions.gnome.org/extension/615/appindicator-support/
+    # - https://extensions.gnome.org/extension/4812/wallpaper-switcher/
     echo "Build gnome-browser-connector"
     cd $HOME/Builds
     if [[ -f $HOME/Builds/gnome-browser-connector ]];
@@ -28,6 +30,7 @@ function build_gnome_connector {
         git pull
     fi
     makepkg -si
+    echo "[WARNING] Don't forget to install the browser extension."
 }
 
 function build_zsh_theme {
