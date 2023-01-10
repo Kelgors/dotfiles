@@ -14,23 +14,33 @@ then
 fi
 
 
-# Install deps, nvm, rust, neovim
+# Install deps, nvm, rust, vim
 echo "  Installing dependencies..."
 sudo apt install -y\
 	build-essential git curl wget htop tar\
 	bat exa fd-find ripgrep\
 	fzf silversearcher-ag\
-	neovim
+	vim tmux
 
-sh -c "curl -sfLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Link config directory
 [[ ! -d $HOME/.config ]] && mkdir $HOME/.config
 
-# nvim config directory
-echo "    Linking .config/nvim"
-[[ -d $HOME/.config/nvim ]] && rm -r $HOME/.config/nvim
-ln -sf $path/config/nvim $HOME/.config/nvim
+# Link config directory
+confdirs="nvim tmux"
+for confdir in $confdirs
+do
+	echo "Link ~/.config/$confdir"
+	[[ -d $HOME/.config/$confdir ]] && rm -r $HOME/.config/$confdir
+	ln -sf $path/config/$confdir $HOME/.config/$confdir
+done
+
+# Specific links
+# Link nvim init.vim as .vimrc 
+ln -sf $HOME/.config/nvim/init.vim $HOME/.vimrc
+# Link tmux config to .tmuxrc
+ln -sf $HOME/.config/tmux/tmux.conf $HOME/.tmuxrc
 
 # User profile variables
 if [[ ! -f $HOME/.$USER.profile ]];

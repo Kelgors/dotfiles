@@ -1,9 +1,5 @@
 path=$(pwd)
-rcfile=".bashrc"
-if [[ -f $HOME/.zshrc ]];
-then
-	rcfile=".zshrc"
-fi
+rcfile=".zshrc"
 was_nvm_installed=$(command -v nvm)
 if [[ -z $USER ]];
 then
@@ -13,89 +9,48 @@ then
 	USER=root
 fi
 
-# Install deps, nvm, rust, neovim
-echo "  Installing dependencies..."
-if [[ -f $(command -v pamac) ]]; 
-then
-	sudo pamac install git curl wget htop tar bat exa neovim\
-		fd ripgrep fzf the_silver_searcher\
-		rust nvm
-elif [[ -f $(command -v apt) ]];
-then
-	sudo apt install -y\
-		build-essential git curl wget htop tar\
-		bat exa fd-find ripgrep\
-		fzf silversearcher-ag\
-		neovim
-	# Install Rust
-	if [[ ! -d $HOME/.rustup ]];
-	then
-		echo " Installing Rust"
-		curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-	else
-		rustup update
-	fi
-	# update nvm
-	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-else
-	echo "ERROR: Missing compatible package manager (apt or pamac)."
-	exit 1
-fi
-
+[[ -f $(command -v pacman) ]] && source ./arch.sh
+install_deps
 sleep 2
+
 # Install Node
 if [[ ! -f $(command -v node) ]];
 then
 	if [[ ! -f "$was_nvm_installed" ]];
 	then
-		if [[ -f /usr/share/nvm/init-nvm.sh ]];
-		then
-			echo 'source /usr/share/nvm/init-nvm.sh' >> $HOME/$rcfile
-			source /usr/share/nvm/init-nvm.sh
-		else
-			echo "export NVM_DIR=\"\$HOME/.nvm\"" >> $rcfile
-			echo "[ -s \"\$NVM_DIR/nvm.sh\" ] && source \"\$NVM_DIR/nvm.sh\"  # This loads nvm" >> $rcfile
-			echo "[ -s \"\$NVM_DIR/bash_completion\" ] && source \"\$NVM_DIR/bash_completion\"  # This loads nvm bash_completion" >> $rcfile
-			export NVM_DIR="$HOME/.nvm"
-			[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-			[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-		fi
-
+		echo 'source /usr/share/nvm/init-nvm.sh' >> $HOME/$rcfile
+		source /usr/share/nvm/init-nvm.sh
 	fi
 	nvm install --lts
 fi
 
-echo "  Update plug.vim"
-sh -c "curl -sfLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+echo "Install plug.vim"
+curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-# Prepare local directory
+# Prepare local & .config directory
 [[ ! -d $HOME/.local ]] && mkdir -p $HOME/.local/share
 [[ ! -d $HOME/.local/share ]] && mkdir $HOME/.local/share
-
-# Install powerline fonts
-echo "    Linking .local/share/fonts"
-[[ -d $HOME/.local/share/fonts ]] && rm -r $HOME/.local/share/fonts
-ln -sf $path/local/share/fonts $HOME/.local/share/fonts
-
-# Link config directory
 [[ ! -d $HOME/.config ]] && mkdir $HOME/.config
 
-# nvim directory
-echo "    Linking .config/nvim"
-[[ -d $HOME/.config/nvim ]] && rm -r $HOME/.config/nvim
-ln -sf $path/config/nvim $HOME/.config/nvim
+# Link config directory
+confdirs="alacritty nvim tmux powerlevel10k"
+for confdir in $confdirs
+do
+	echo "Link ~/.config/$confdir"
+	[[ -d $HOME/.config/$confdir ]] && rm -r $HOME/.config/$confdir
+	ln -sf $path/config/$confdir $HOME/.config/$confdir
+done
 
+# Specific links
+# Link nvim init.vim as .vimrc 
+ln -sf $HOME/.config/nvim/init.vim $HOME/.vimrc
+# Link tmux config to .tmuxrc
+ln -sf $HOME/.config/tmux/tmux.conf $HOME/.tmuxrc
+# Link powerlevel10k config to .p10k.zsh
+ln -sf $HOME/.config/powerlevel10k/p10k.zsh $HOME/.p10k.zsh
 # User profile variables (with nothing else)
-if [[ ! -f $HOME/.$USER.profile ]];
-then
-	echo "Creating symlink for .$USER.profile"
-	ln -sf $path/../user.profile $HOME/.$USER.profile
+ln -sf $path/../user.profile $HOME/.$USER.profile
 
-	if [[ "$(cat $HOME/$rcfile | sed -n "/# source personal variables/p" | wc -l)" -eq "0" ]];
-	then
-		echo "# source personal variables" >> $HOME/$rcfile
-		echo "source \$HOME/.$USER.profile" >> $HOME/$rcfile
-	fi
-fi
+[[ -z $HOME/.zshrc ]] && cp $path/config/default.zshrc $HOME/.zshrc
 
-$SHELL
+build_apps

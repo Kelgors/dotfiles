@@ -9,9 +9,6 @@ command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 nnoremap <C-T> :NERDTreeToggle<CR>
 nnoremap <F2> :NERDTreeFind<CR>
 nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
-nmap     <C-F>f <Plug>CtrlSFPrompt
-nmap     <C-F>n <Plug>CtrlSFCwordPath
-nmap     <C-F>p <Plug>CtrlSFPwordPath
 nmap 		 <C-P> :FZF<CR>
 
 let NERDTreeShowHidden=1
