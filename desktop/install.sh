@@ -1,4 +1,5 @@
 project_path=$(pwd)
+greetd_was_installed=$(command -v greetd)
 if [[ -z $USER ]];
 then
 	echo "You should not execute this script as root..."
@@ -10,6 +11,12 @@ fi
 source ./arch.sh 
 install_deps
 sleep 2
+
+if [[ -z "$greetd_was_installed" ]];
+then
+	sudo cp $project_path/etc/greetd/config.toml /etc/greetd/config.toml
+	sudo systemctl enable greetd
+fi
 
 echo "Setup home config"
 # Prepare local & .config directory

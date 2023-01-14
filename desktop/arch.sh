@@ -18,12 +18,12 @@ function install_deps {
     [[ -z $(command -v paru) ]] && install_paru
 
     echo "Installing desktop packages"
-    paru --needed -S dcron\
-        zsh zsh-syntax-highlighting zsh-history-substring-search zsh-theme-powerlevel10k\
+    paru --needed -S dcron htop\
+        zsh zsh-syntax-highlighting zsh-autosuggestions zsh-history-substring-search zsh-theme-powerlevel10k\
         hyprland rofi-lbonn-wayland-git greetd greetd-tuigreet swaylock-effects swayidle mako grimblast-git\
         swww networkmanager pavucontrol hyprpicker wl-clipboard pipewire pipewire-alsa pipewire-pulse pipewire-jack\
         wireplumber xdg-desktop-portal-hyprland-git qt5-wayland qt6-wayland flatpak\
-        nerd-fonts-noto-sans-mono alacritty fbterm nvm wget exa fzf termusic vlc tty-clock-git firefox
+        nerd-fonts-noto-sans-mono alacritty fbterm nvm wget exa fzf termusic vlc tty-clock-git firefox bottom
     
     echo "Add user to groups"
     sudo usermod -aG users,video,storage,optical,input,audio,wheel $USER
