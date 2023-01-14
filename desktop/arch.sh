@@ -26,7 +26,7 @@ function install_deps {
         nerd-fonts-noto-sans-mono alacritty fbterm nvm wget exa fzf termusic vlc tty-clock-git firefox
     
     echo "Add user to groups"
-    sudo usermod -aG users video storage optical input audio wheel $USER
+    sudo usermod -aG users,video,storage,optical,input,audio,wheel $USER
     [[ ! -f $(command -v node) ]] && nvm install --lts
 }
 
@@ -38,25 +38,26 @@ function build_apps {
 }
 
 function build_zsh_theme {
-    echo "- Build zsh config"
+    echo "- Fetch zsh config"
     cd $builddir
     if [[ -f $builddir/manjaro-zsh-config ]];
     then 
-        git clone https://github.com/Chrysostomus/manjaro-zsh-config.git
-        cd manjaro-zsh-config
-    else
         cd manjaro-zsh-config
         git pull
+    else
+        git clone https://github.com/Chrysostomus/manjaro-zsh-config.git
+        cd manjaro-zsh-config
     fi
     zshdir="/usr/share/zsh"
     # copy files
-    sudo builtin cp manjaro-zsh-config $zshdir/
-    sudo builtin cp manjaro-zsh-prompt $zshdir/
+    sudo cp manjaro-zsh-config $zshdir/manjaro-zsh-config
+    sudo cp manjaro-zsh-prompt $zshdir/manjaro-zsh-prompt
     # remove powerline10k config
     sudo sed -i 's/source \/usr\/share\/zsh\/p10k/# source \/usr\/share\/zsh\/p10k/' $zshdir/manjaro-zsh-prompt
 }
 
 function install_flatpaks {
+    echo "Install flatpak apps"
     sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     sudo flatpak install --or-update --noninteractive com.github.IsmaelMartinez.teams_for_linux
     sudo flatpak install --or-update --noninteractive com.obsproject.Studio
