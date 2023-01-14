@@ -1,6 +1,4 @@
-path=$(pwd)
-rcfile=".zshrc"
-was_nvm_installed=$(command -v nvm)
+project_path=$(pwd)
 if [[ -z $USER ]];
 then
 	echo "You should not execute this script as root..."
@@ -8,49 +6,38 @@ then
 	sleep 5
 	USER=root
 fi
-
-[[ -f $(command -v pacman) ]] && source ./arch.sh
+# Install dependencies
+source ./arch.sh 
 install_deps
 sleep 2
 
-# Install Node
-if [[ ! -f $(command -v node) ]];
-then
-	if [[ ! -f "$was_nvm_installed" ]];
-	then
-		echo 'source /usr/share/nvm/init-nvm.sh' >> $HOME/$rcfile
-		source /usr/share/nvm/init-nvm.sh
-	fi
-	nvm install --lts
-fi
-
-echo "Install plug.vim"
-curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
+echo "Setup home config"
 # Prepare local & .config directory
-[[ ! -d $HOME/.local ]] && mkdir -p $HOME/.local/share
-[[ ! -d $HOME/.local/share ]] && mkdir $HOME/.local/share
-[[ ! -d $HOME/.config ]] && mkdir $HOME/.config
+mkdir -p ~/.local/share
+mkdir -p ~/.config/nvim
+
+crontab "$project_path/config/crontab"
+
+[[ -z ~/.config/nvim/init.lua ]] && curl --silent --output ~/.config/nvim/init.lua https://raw.githubusercontent.com/nvim-lua/kickstart.nvim/master/init.lua && echo "- neovim"
 
 # Link config directory
-confdirs="alacritty nvim tmux powerlevel10k"
+confdirs="alacritty bottom cava handlr hypr mako powerlevel10k rofi tmux"
 for confdir in $confdirs
 do
-	echo "Link ~/.config/$confdir"
-	[[ -d $HOME/.config/$confdir ]] && rm -r $HOME/.config/$confdir
-	ln -sf $path/config/$confdir $HOME/.config/$confdir
+	echo "- $confdir"
+	[[ -d ~/.config/$confdir ]] && rm -r ~/.config/$confdir
+	ln -sf $project_path/config/$confdir ~/.config/$confdir
 done
 
 # Specific links
-# Link nvim init.vim as .vimrc 
-ln -sf $HOME/.config/nvim/init.vim $HOME/.vimrc
-# Link tmux config to .tmuxrc
-ln -sf $HOME/.config/tmux/tmux.conf $HOME/.tmuxrc
+# Link tmux config to .tmux.conf
+ln -sf ~/.config/tmux/tmux.conf ~/.tmux.conf
 # Link powerlevel10k config to .p10k.zsh
-ln -sf $HOME/.config/powerlevel10k/p10k.zsh $HOME/.p10k.zsh
-# User profile variables (with nothing else)
-ln -sf $path/../user.profile $HOME/.$USER.profile
+ln -sf ~/.config/powerlevel10k/p10k.zsh ~/.p10k.zsh
+[[ -z ~/.config/hypr/monitors.conf ]] && echo "monitor=,preferred,auto,auto" > ~/.config/hypr/custom.conf
 
-[[ -z $HOME/.zshrc ]] && cp $path/config/default.zshrc $HOME/.zshrc
+# User profile variables
+[[ -z ~/.$USER.profile ]] && cp $(dirname $project_path)/user.profile ~/.$USER.profile && echo "~/.$USER.profile"
+[[ -z ~/.zshrc ]] && cp $project_path/config/default.zshrc ~/.zshrc && echo "~/.zshrc"
 
 build_apps

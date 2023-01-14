@@ -1,9 +1,9 @@
-export EDITOR="/usr/bin/vim"
-export VISUAL="/usr/bin/vim"
-export CODEEDITOR="/usr/bin/vim"
+editor="vi"
+[[ -f /usr/bin/vim ]] && editor="vim"
+[[ -f /usr/bin/nvim ]] && editor="nvim"
+export EDITOR="/usr/bin/$editor"
 [[ -f /usr/bin/firefox ]] && export BROWSER="/usr/bin/firefox"
 
-alias ls="/usr/bin/exa"
 alias ll="/usr/bin/exa -l"
 alias lla="/usr/bin/exa -la"
 [[ -f $(command -v batcat) ]] && [[ ! -f $(command -v bat) ]] && alias bat="/usr/bin/batcat"

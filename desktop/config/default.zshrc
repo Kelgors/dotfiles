@@ -12,6 +12,5 @@ fi
 source ~/.p10k.zsh
 # Node Version Manager
 source /usr/share/nvm/init-nvm.sh
-
 # source personal variables
 source ~/.kelgors.profile

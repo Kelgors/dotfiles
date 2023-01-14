@@ -1,42 +1,46 @@
+builddir=/tmp/Builds
+mkdir -p $builddir
+
+function install_paru {
+    echo "Installing paru"
+    sudo pacman --needed -Sy --needed base-devel sudo vi
+    
+    echo "Editing sudoers via visudo. Please ensure informations are correct"
+    su -c "cat /etc/sudoers > /etc/sudoers.tmp && echo \"%wheel ALL=(ALL:ALL) ALL\" >> /etc/sudoers.tmp && visudo -f /etc/sudoers.tmp"
+
+    cd $builddir
+    git clone https://aur.archlinux.org/paru.git
+    cd paru
+    makepkg -si
+}
+
 function install_deps {
-    aurpkgmgr="yay"
-    [[ -f $(command -v paru) ]] && aurpkgmgr="paru"
+    [[ -z $(command -v paru) ]] && install_paru
 
-    sudo pacman -Syu git curl wget htop tar bat exa\
-        fd ripgrep fzf the_silver_searcher rust vim\
-        zsh zsh-syntax-highlighting zsh-history-substring-search zsh-theme-powerlevel10k
-
-    $aurpkgmgr -Syua --noconfirm nvm nerd-fonts-complete cava termusic
+    echo "Installing desktop packages"
+    paru --needed -S dcron\
+        zsh zsh-syntax-highlighting zsh-history-substring-search zsh-theme-powerlevel10k\
+        hyprland rofi-lbonn-wayland-git greetd greetd-tuigreet swaylock-effects swayidle mako grimblast-git\
+        swww networkmanager pavucontrol hyprpicker wl-clipboard pipewire pipewire-alsa pipewire-pulse pipewire-jack\
+        wireplumber xdg-desktop-portal-hyprland-git qt5-wayland qt6-wayland flatpak\
+        nerd-fonts-noto-sans-mono alacritty fbterm nvm wget exa fzf termusic vlc tty-clock-git firefox
+    
+    echo "Add user to groups"
+    sudo usermod -aG users video storage optical input audio wheel $USER
+    [[ ! -f $(command -v node) ]] && nvm install --lts
 }
 
 function build_apps {
-    mkdir -p $HOME/Builds
-    build_gnome_connector
+    echo "Building apps"
+    mkdir -p $builddir
     build_zsh_theme
-}
-
-function build_gnome_connector {
-    # gnome-browser-connector for 
-    # - https://extensions.gnome.org/extension/615/appindicator-support/
-    # - https://extensions.gnome.org/extension/4812/wallpaper-switcher/
-    echo "Build gnome-browser-connector"
-    cd $HOME/Builds
-    if [[ -f $HOME/Builds/gnome-browser-connector ]];
-    then 
-        git clone https://aur.archlinux.org/gnome-browser-connector.git
-        cd gnome-browser-connector
-    else
-        cd gnome-browser-connector
-        git pull
-    fi
-    makepkg -si
-    echo "[WARNING] Don't forget to install the browser extension."
+    install_flatpaks
 }
 
 function build_zsh_theme {
-    echo "Build zsh config"
-    cd $HOME/Builds
-    if [[ -f $HOME/Builds/manjaro-zsh-config ]];
+    echo "- Build zsh config"
+    cd $builddir
+    if [[ -f $builddir/manjaro-zsh-config ]];
     then 
         git clone https://github.com/Chrysostomus/manjaro-zsh-config.git
         cd manjaro-zsh-config
@@ -46,8 +50,19 @@ function build_zsh_theme {
     fi
     zshdir="/usr/share/zsh"
     # copy files
-    sudo /usr/bin/cp manjaro-zsh-config $zshdir/
-    sudo /usr/bin/cp manjaro-zsh-prompt $zshdir/
+    sudo builtin cp manjaro-zsh-config $zshdir/
+    sudo builtin cp manjaro-zsh-prompt $zshdir/
     # remove powerline10k config
     sudo sed -i 's/source \/usr\/share\/zsh\/p10k/# source \/usr\/share\/zsh\/p10k/' $zshdir/manjaro-zsh-prompt
+}
+
+function install_flatpaks {
+    sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    sudo flatpak install --or-update --noninteractive com.github.IsmaelMartinez.teams_for_linux
+    sudo flatpak install --or-update --noninteractive com.obsproject.Studio
+    sudo flatpak install --or-update --noninteractive com.visualstudio.code
+    sudo flatpak install --or-update --noninteractive md.obsidian.Obsidian
+    sudo flatpak install --or-update --noninteractive org.filezillaproject.Filezilla
+    sudo flatpak install --or-update --noninteractive org.gnome.gThumb
+    sudo flatpak install --or-update --noninteractive rest.insomnia.Insomnia
 }

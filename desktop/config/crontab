@@ -1,0 +1,7 @@
+# Change wallpaper
+*/5 * * * * swww img $(shuf -n1 -e $(ls -d ~/Dropbox/Pictures/Wallpapers/current/*))
+# Reminder to sleep
+29 23 * * * notify-send -u critical -a shutdown "This computer is going to shut down in 15 minutes"
+39 23 * * * notify-send -u critical -a shutdown "This computer is going to shut down in 5 minutes"
+# shutdown before hard stop
+43 23 * * * sudo shutdown -h && notify-send -u critical -a shutdown "WARNING ! This computer is going to shut down in 1 minute"
