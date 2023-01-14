@@ -16,9 +16,8 @@ echo "Setup home config"
 mkdir -p ~/.local/share
 mkdir -p ~/.config/nvim
 
-crontab "$project_path/config/crontab"
-
-[[ -z ~/.config/nvim/init.lua ]] && curl --silent --output ~/.config/nvim/init.lua https://raw.githubusercontent.com/nvim-lua/kickstart.nvim/master/init.lua && echo "- neovim"
+[[ ! -f ~/.config/nvim/init.lua ]] && curl --silent --output ~/.config/nvim/init.lua https://raw.githubusercontent.com/nvim-lua/kickstart.nvim/master/init.lua && echo "- neovim"
+[[ -z $(sudo crontab -u $USER -l) ]] && sudo crontab -u $USER "$project_path/config/crontab"
 
 # Link config directory
 confdirs="alacritty bottom cava handlr hypr mako powerlevel10k rofi tmux"
