@@ -33,10 +33,10 @@ done
 ln -sf ~/.config/tmux/tmux.conf ~/.tmux.conf
 # Link powerlevel10k config to .p10k.zsh
 ln -sf ~/.config/powerlevel10k/p10k.zsh ~/.p10k.zsh
-[[ -z ~/.config/hypr/monitors.conf ]] && echo "monitor=,preferred,auto,auto" > ~/.config/hypr/custom.conf
+[[ ! -f ~/.config/hypr/monitors.conf ]] && echo "monitor=,preferred,auto,auto" > ~/.config/hypr/custom.conf
 
 # User profile variables
-[[ -z ~/.$USER.profile ]] && cp $(dirname $project_path)/user.profile ~/.$USER.profile && echo "~/.$USER.profile"
-[[ -z ~/.zshrc ]] && cp $project_path/config/default.zshrc ~/.zshrc && echo "~/.zshrc"
+[[ ! -f ~/.$USER.profile ]] && cp $(dirname $project_path)/user.profile ~/.$USER.profile && echo "~/.$USER.profile"
+[[ ! -f ~/.zshrc ]] && cp $project_path/config/default.zshrc ~/.zshrc && echo "~/.zshrc"
 
 build_apps
