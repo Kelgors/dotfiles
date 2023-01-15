@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Termusic
+Exec=/usr/bin/termusic -dc
+Terminal=true
+Type=Application
+# Icon=termusic
+StartupWMClass=musicplayer
+Comment=Music player in terminal
+Categories=Audio;AudioVideo;

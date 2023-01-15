@@ -21,13 +21,16 @@ function install_deps {
     paru --needed -S dcron htop\
         zsh zsh-syntax-highlighting zsh-autosuggestions zsh-history-substring-search zsh-theme-powerlevel10k\
         hyprland rofi-lbonn-wayland-git greetd greetd-tuigreet swaylock-effects swayidle mako grimblast-git\
-        swww networkmanager pavucontrol hyprpicker wl-clipboard pipewire pipewire-alsa pipewire-pulse pipewire-jack\
+        swww networkmanager pavucontrol hyprpicker wl-clipboard pipewire pipewire-alsa pipewire-pulse pipewire-jack dex\
         wireplumber xdg-desktop-portal-hyprland-git qt5-wayland qt6-wayland flatpak\
         nerd-fonts-noto-sans-mono alacritty fbterm nvm wget exa fzf termusic vlc tty-clock-git firefox bottom
     
     echo "Add user to groups"
     sudo usermod -aG users,video,storage,optical,input,audio,wheel $USER
     [[ ! -f $(command -v node) ]] && nvm install --lts
+
+    sudo systemctl enable dcron
+    sudo systemctl enable greetd
 }
 
 function build_apps {
@@ -60,10 +63,10 @@ function install_flatpaks {
     echo "Install flatpak apps"
     sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     sudo flatpak install --or-update --noninteractive com.github.IsmaelMartinez.teams_for_linux
-    sudo flatpak install --or-update --noninteractive com.obsproject.Studio
     sudo flatpak install --or-update --noninteractive com.visualstudio.code
     sudo flatpak install --or-update --noninteractive md.obsidian.Obsidian
     sudo flatpak install --or-update --noninteractive org.filezillaproject.Filezilla
     sudo flatpak install --or-update --noninteractive org.gnome.gThumb
     sudo flatpak install --or-update --noninteractive rest.insomnia.Insomnia
+    sudo flatpak install --or-update --noninteractive net.lutris.Lutris
 }

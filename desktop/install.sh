@@ -15,16 +15,28 @@ sleep 2
 if [[ -z "$greetd_was_installed" ]];
 then
 	sudo cp $project_path/etc/greetd/config.toml /etc/greetd/config.toml
-	sudo systemctl enable greetd
 fi
 
 echo "Setup home config"
 # Prepare local & .config directory
-mkdir -p ~/.local/share
+mkdir -p ~/.local/share/applications
 mkdir -p ~/.config/nvim
 
-[[ ! -f ~/.config/nvim/init.lua ]] && curl --silent --output ~/.config/nvim/init.lua https://raw.githubusercontent.com/nvim-lua/kickstart.nvim/master/init.lua && echo "- neovim"
-[[ -z $(sudo crontab -u $USER -l) ]] && sudo crontab -u $USER "$project_path/config/crontab"
+if [[ ! -f ~/.config/nvim/init.lua ]];
+then
+	echo "- neovim"
+	curl --silent --output ~/.config/nvim/init.lua https://raw.githubusercontent.com/nvim-lua/kickstart.nvim/master/init.lua
+	echo -e "\nvim.opt.clipboard = 'unnamedplus'\n" >> ~/.config/nvim/init.lua
+fi
+[[ -z $(sudo crontab -u $USER -l) ]] && sudo crontab -u $USER "$project_path/config/crontab" && echo "- crontab"
+
+echo "- desktop entries"
+for desktopentry in $(/usr/bin/ls $project_path/local/share/applications)
+do
+	echo "-- $desktopentry"
+	ln -sf $project_path/local/share/applications/$desktopentry ~/.local/share/applications/$desktopentry
+done
+/usr/bin/update-desktop-database ~/.local/share/applications
 
 # Link config directory
 confdirs="alacritty bottom cava handlr hypr mako powerlevel10k rofi tmux"
