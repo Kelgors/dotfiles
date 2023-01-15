@@ -18,7 +18,7 @@ function install_deps {
     [[ -z $(command -v paru) ]] && install_paru
 
     echo "Installing desktop packages"
-    paru --needed -S dcron htop\
+    paru --needed -S dcron htop openssh\
         zsh zsh-syntax-highlighting zsh-autosuggestions zsh-history-substring-search zsh-theme-powerlevel10k\
         hyprland rofi-lbonn-wayland-git greetd greetd-tuigreet swaylock-effects swayidle mako grimblast-git\
         swww networkmanager pavucontrol hyprpicker wl-clipboard pipewire pipewire-alsa pipewire-pulse pipewire-jack dex\
