@@ -21,10 +21,19 @@ function install_deps {
     paru --needed -S dcron htop openssh\
         zsh zsh-syntax-highlighting zsh-autosuggestions zsh-history-substring-search zsh-theme-powerlevel10k\
         hyprland rofi-lbonn-wayland-git greetd greetd-tuigreet swaylock-effects swayidle mako grimblast-git\
-        swww networkmanager pavucontrol hyprpicker wl-clipboard pipewire pipewire-alsa pipewire-pulse pipewire-jack dex\
+        swww networkmanager pavucontrol hyprpicker wl-clipboard pipewire pipewire-alsa pipewire-pulse pipewire-jack\
+        dex xdg-user-dirs libnotify polkit polkit-gnome\
+        thunar thunar-volman thunar-archive-plugin file-roller\
         wireplumber xdg-desktop-portal-hyprland-git qt5-wayland qt6-wayland flatpak\
-        nerd-fonts-noto-sans-mono alacritty fbterm nvm wget exa fzf termusic vlc tty-clock-git firefox bottom
+        nerd-fonts-noto-sans-mono alacritty fbterm nvm wget exa fzf termusic vlc tty-clock-git firefox bottom\
+        ripgrep lazygit gdu \
+        virt-manager qemu-desktop dnsmasq iptables-nft
     
+    xdg-user-dirs-update
+    mkdir ~/Pictures/Screenshots
+    # FIX missing rofi theme
+    # FIX missing file selection
+
     echo "Add user to groups"
     sudo usermod -aG users,video,storage,optical,input,audio,wheel $USER
     [[ ! -f $(command -v node) ]] && nvm install --lts
