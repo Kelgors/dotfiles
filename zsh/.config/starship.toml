@@ -1,0 +1,20 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+right_format = """$time"""
+
+[username]
+format = '[$user]($style)'
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = true
+format = '@[$hostname]($style) '
+disabled = false
+
+[time]
+disabled = false
+time_format = '%T'
+format = '[$time]($style) '
+utc_time_offset = '+1'
