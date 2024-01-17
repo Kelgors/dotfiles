@@ -1,7 +1,0 @@
-# Change wallpaper
-*/5 * * * * XDG_RUNTIME_DIR=/run/user/$(id -u) swww img $(shuf -n1 -e $(ls -d ~/Dropbox/Pictures/Wallpapers/current/*)) &>/dev/null
-# Reminder to sleep
-29 23 * * * XDG_RUNTIME_DIR=/run/user/$(id -u); notify-send -u critical 'This computer is going to shut down in 15 minutes'
-39 23 * * * XDG_RUNTIME_DIR=/run/user/$(id -u); notify-send -u critical 'This computer is going to shut down in 5 minutes'
-# shutdown before hard stop
-43 23 * * * XDG_RUNTIME_DIR=/run/user/$(id -u); shutdown -h; notify-send -u critical 'WARNING ! This computer is going to shut down in 1 minute'
