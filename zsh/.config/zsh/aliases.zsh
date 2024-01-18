@@ -1,4 +1,5 @@
 alias rm="trash-put"
+alias ls="exa"
 alias ll="exa -l"
 alias lla="exa -la"
 alias bat="batcat -p"

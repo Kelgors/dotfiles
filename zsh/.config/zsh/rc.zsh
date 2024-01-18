@@ -38,3 +38,10 @@ source "$HOME/.local/share/catppuccin/zsh-syntax-highlighting/themes/catppuccin_
 source "$HOME/.local/share/zsh/syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$HOME/.local/share/zsh/autosuggestions/zsh-autosuggestions.zsh"
 
+bindkey '^R' history-incremental-search-backward
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
+bindkey "^[[3~" delete-char
+

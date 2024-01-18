@@ -3,9 +3,35 @@
 
 palette = "catppuccin_mocha"
 right_format = """$time"""
+add_newline = false
+format = """
+$username\
+$hostname\
+$shlvl\
+$directory\
+$vcsh\
+$fossil_branch\
+$fossil_metrics\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$memory_usage\
+$sudo\
+$cmd_duration\
+$line_break\
+$jobs\
+$battery\
+$status\
+$os\
+$container\
+$shell\
+$character"""
 
 [username]
-format = '[$user]($style)'
+format = '[$user]($style) '
 disabled = false
 show_always = true
 
