@@ -1,0 +1,8 @@
+alias rm="trash-put"
+alias ls="exa"
+alias ll="exa -l"
+alias lla="exa -la"
+alias bat="batcat -p"
+alias htop="htop -u kelgors"
+alias fcd="source $HOME/.config/zsh/scripts/fcd.zsh"
+alias tma="$HOME/.config/zsh/scripts/tmux-main.zsh"

@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Clock
-Exec=/usr/bin/tty-clock -c -C 1
-Terminal=true
-Type=Application
-# Icon=tty-clock
-StartupWMClass=clock
-Comment=Clock in terminal
-Categories=Utility;Clock;
