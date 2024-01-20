@@ -1,6 +1,7 @@
 export ZSH_CONFIG_PATH="$HOME/.config/zsh"
 
 autoload=(
+  bindings
   rc
   bin
   aliases

@@ -4,9 +4,6 @@ eval "$($HOME/.local/bin/starship init zsh)"
 
 setopt histignorealldups sharehistory
 
-# Use emacs keybindings even if our EDITOR is set to vi
-# bindkey -e
-
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=2000
 SAVEHIST=1000
@@ -37,11 +34,4 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 source "$HOME/.local/share/catppuccin/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
 source "$HOME/.local/share/zsh/syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$HOME/.local/share/zsh/autosuggestions/zsh-autosuggestions.zsh"
-
-bindkey '^R' history-incremental-search-backward
-bindkey "^[[1;5C" forward-word
-bindkey "^[[1;5D" backward-word
-bindkey "^[[H" beginning-of-line
-bindkey "^[[F" end-of-line
-bindkey "^[[3~" delete-char
 
