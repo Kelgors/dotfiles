@@ -32,7 +32,7 @@ $character"""
 
 [username]
 format = '[$user]($style)'
-show_always = false
+show_always = true
 
 [hostname]
 ssh_only = true
