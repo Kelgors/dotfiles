@@ -1,4 +1,4 @@
-#!/usr/bin/zsh -eu
+#!/bin/bash -eu
 DEPDIR="$HOME/.local/share"
 
 stow -v nvim
