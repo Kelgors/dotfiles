@@ -1,4 +1,5 @@
-#!/usr/bin/zsh -eu
+#!/bin/bash -eu
+
 if [[ -z "${TMUX-}" ]]; then
   if ! tmux ls 2> /dev/null | grep -q "main" ; then
     tmux new -s main -n start
