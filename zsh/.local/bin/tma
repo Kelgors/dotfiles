@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euxo pipefail
+set -euo pipefail
 
 if [[ -z "${TMUX-}" ]]; then
   if ! tmux ls 2> /dev/null | grep -q "main" ; then

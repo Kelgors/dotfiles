@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euxo pipefail
+set -euo pipefail
 ## Remove a collection of files (dist/ and coverage/)
 ## Optionally, you can remove node packages
 ## Optionnaly, you can remove all these files deeply
