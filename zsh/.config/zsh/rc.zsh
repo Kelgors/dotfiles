@@ -4,10 +4,10 @@ eval "$($HOME/.local/bin/starship init zsh)"
 
 setopt histignorealldups sharehistory
 
-# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=2000
-SAVEHIST=1000
-HISTFILE="$HOME/.config/zsh/history"
+# Keep X lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=10000
+SAVEHIST=2000
+HISTFILE="$HOME/.local/share/zsh/history"
 
 # Use modern completion system
 autoload -Uz compinit

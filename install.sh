@@ -1,7 +1,11 @@
 #!/bin/bash -eu
 DEPDIR="$HOME/.local/share"
 
-stow -v nvim
+# Ensure that .local/bin directory is not symlinked
+mkdir -p "$HOME/.local/bin/"
+touch "$HOME/.local/bin/.keep"
+
+# stow -v nvim
 stow -v zsh
 stow -v htop
 stow -v tmux
@@ -17,7 +21,6 @@ curl -sS https://starship.rs/install.sh | BIN_DIR=~/.local/bin sh
 git clone https://github.com/tmux-plugins/tpm "$DEPDIR/tmux/tpm"
 
 cat <<EOF
-You need to install: zsh trash-cli
+You need to install: zsh
 Run: chsh -s \$(which zsh)
-Add to crontab: 27 * * * * /usr/bin/trash-empty 3 2&>/dev/null
 EOF
