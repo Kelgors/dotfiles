@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+cwd="${1-}"
+[[ -d "$cwd" ]] && cd "$cwd"
+
 if [[ -z "${TMUX-}" ]]; then
   if ! tmux ls 2> /dev/null | grep -q "main" ; then
     tmux new -s main -n start
