@@ -1,7 +1,7 @@
 # This script should be used in an alias
 # alias fcd="source /path/to/script.sh -gp"
 # Dependencies:
-# - fzf: https://github.com/junegunn/fzf
+# - skim: https://github.com/lotabout/skim
 # - git
 # - optional: npm or yarn or pnpm
 
@@ -55,7 +55,7 @@ done
 shift "$(($OPTIND -1))"
 
 # start fuzzy & validate output
-selected=$(find . -maxdepth 1 -type d -print | fzf)
+selected=$(ls -D | sk)
 if [ -z "$selected" ]; then
   return 0
 fi

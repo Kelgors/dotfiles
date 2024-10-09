@@ -1,17 +1,12 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
 
-fdfind_cmd=""
-if [ -f $(command -v fdfind) ]; then
-  fdfind_cmd="fdfind"
-elif [ -f $(command -v fd) ]; then
-  fdfind_cmd="fd"
-fi
+fdfind_cmd=$(command -v fdfind || command -v fd)
 
-if [ -f "$fdfind_cmd" ]; then
+if [ -n "$fdfind_cmd" ]; then
   "$fdfind_cmd" . \
     --type f \
-    --size -5k \
+    --size -30k \
     --exclude '**/node_modules/**' \
     --exclude '**/coverage/**' \
     --exclude '**/dist/**' \
@@ -22,11 +17,11 @@ fi
 
 find . \
   -type f \
-  -size -5k \
+  -size -30k \
   -and \( \
     -not -path "*/node_modules/*" \
     -and -not -path '*/coverage/*' \
     -and -not -path "*/dist/*" \
     -and -not -path "*/.git/*" \
   \) \
-  -exec grep -H "$1" {} +
+  -exec grep -H "$1" {} \;

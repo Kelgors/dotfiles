@@ -46,7 +46,7 @@ format = ' [$path]($style)[$read_only]($read_only_style) '
 disabled = false
 time_format = '%T'
 format = '[$time]($style) '
-utc_time_offset = '+1'
+utc_time_offset = 'local'
 
 [palettes.catppuccin_frappe]
 rosewater = "#f2d5cf"

@@ -1,9 +1,13 @@
-export ZSH_CONFIG_PATH="$HOME/.config/zsh"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export ZSH_CONFIG_PATH="$XDG_CONFIG_HOME/zsh"
+export MANPATH="$XDG_DATA_HOME/man:$MANPATH"
 
 autoload=(
   bindings
-  rc
   bin
+  rc
   aliases
   user
 )

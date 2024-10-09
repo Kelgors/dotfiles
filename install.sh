@@ -1,26 +1,23 @@
-#!/bin/bash -eu
-DEPDIR="$HOME/.local/share"
+set -euo pipefail
+
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export BIN_HOME="${BIN_HOME:-$HOME/.local/bin}"
+
+alias stow="$(command -v stow) '--target=$HOME' '--dir=$PWD/home' -v"
 
 # Ensure that .local/bin directory is not symlinked
-mkdir -p "$HOME/.local/bin/"
-touch "$HOME/.local/bin/.keep"
+mkdir -p "$BIN_HOME"
+touch "$BIN_HOME/.keep"
 
-# stow -v nvim
-stow -v zsh
-stow -v htop
-stow -v tmux
+stow htop
 
-touch "$HOME/.config/zsh/user.zsh"
+ls scripts | while read -r file; do
+  if [[ "$file" != *.sh ]]; then
+    continue
+  fi
+  echo "$file"
+  . ./scripts/$file
+done
 
-# zsh dependencies
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$DEPDIR/zsh/syntax-highlighting"
-git clone https://github.com/zsh-users/zsh-autosuggestions.git "$DEPDIR/zsh/autosuggestions"
-git clone https://github.com/catppuccin/zsh-syntax-highlighting.git "$DEPDIR/catppuccin/zsh-syntax-highlighting"
-curl -sS https://starship.rs/install.sh | BIN_DIR=~/.local/bin sh
-# tmux deps
-git clone https://github.com/tmux-plugins/tpm "$DEPDIR/tmux/tpm"
-
-cat <<EOF
-You need to install: zsh
-Run: chsh -s \$(which zsh)
-EOF

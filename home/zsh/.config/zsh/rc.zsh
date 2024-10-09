@@ -1,7 +1,4 @@
 # Set up the prompt
-
-eval "$($HOME/.local/bin/starship init zsh)"
-
 setopt histignorealldups sharehistory
 
 # Keep X lines of history within the shell and save it to ~/.zsh_history:
@@ -31,7 +28,13 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-source "$HOME/.local/share/catppuccin/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
-source "$HOME/.local/share/zsh/syntax-highlighting/zsh-syntax-highlighting.zsh"
-source "$HOME/.local/share/zsh/autosuggestions/zsh-autosuggestions.zsh"
+source "$XDG_DATA_HOME/zsh/catppuccin/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
+source "$XDG_DATA_HOME/zsh/syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$XDG_DATA_HOME/zsh/autosuggestions/zsh-autosuggestions.zsh"
 
+if command -v starship 2>&1 >/dev/null; then
+  eval "$(starship init zsh)"
+fi
+if command -v atuin 2>&1 >/dev/null; then
+  eval "$(atuin init zsh --disable-up-arrow)"
+fi
