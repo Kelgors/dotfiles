@@ -4,7 +4,7 @@ setopt histignorealldups sharehistory
 # History
 HISTSIZE=10000
 SAVEHIST=$HISTSIZE
-HISTFILE="$HOME/.local/share/zsh/history"
+HISTFILE="$XDG_DATA_HOME/zsh/history"
 HISTDUP=erase
 setopt appendhistory
 setopt sharehistory
