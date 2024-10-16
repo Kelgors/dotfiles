@@ -1,10 +1,18 @@
 # Set up the prompt
 setopt histignorealldups sharehistory
 
-# Keep X lines of history within the shell and save it to ~/.zsh_history:
+# History
 HISTSIZE=10000
-SAVEHIST=2000
+SAVEHIST=$HISTSIZE
 HISTFILE="$HOME/.local/share/zsh/history"
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
 # Use modern completion system
 autoload -Uz compinit
