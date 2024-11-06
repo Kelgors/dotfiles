@@ -5,12 +5,15 @@ fdfind_cmd=$(command -v fdfind || command -v fd)
 
 if [ -n "$fdfind_cmd" ]; then
   "$fdfind_cmd" . \
-    --type f \
+    --type file \
     --size -30k \
-    --exclude '**/node_modules/**' \
-    --exclude '**/coverage/**' \
-    --exclude '**/dist/**' \
-    --exclude '**/.git/**' \
+    --hidden \
+    --no-ignore \
+    --exclude 'node_modules' \
+    --exclude '.terraform' \
+    --exclude 'coverage' \
+    --exclude 'dist' \
+    --exclude '.git' \
     --exec grep -H "$1" {} \;
   exit 0
 fi
@@ -20,6 +23,7 @@ find . \
   -size -30k \
   -and \( \
     -not -path "*/node_modules/*" \
+    -and -not -path '*/.terraform/*' \
     -and -not -path '*/coverage/*' \
     -and -not -path "*/dist/*" \
     -and -not -path "*/.git/*" \
