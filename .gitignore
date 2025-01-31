@@ -1,3 +1,4 @@
 home/zsh/.config/zsh/user.zsh
+home/zsh/.config/zsh/autoload
 home/tmux/.config/tmux/plugins
 home/nvim/.config/nvim/lazy-lock.json
