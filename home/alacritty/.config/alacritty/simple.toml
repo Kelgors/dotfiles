@@ -16,5 +16,5 @@ import = ["~/.config/alacritty/catppuccin-mocha.toml"]
 [terminal]
 
 [terminal.shell]
-program = "tmux"
-args = ["new-session", "-A", "-D", "-s", "main", "-n", "start"]
+program = "zsh"
+args = ["-l", "-i"]
