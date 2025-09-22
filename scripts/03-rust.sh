@@ -6,4 +6,4 @@ fi
 
 rustup override set stable
 rustup update stable
-rustup component add rls rust-analysis rust-src
+rustup component add rust-analysis rust-src
